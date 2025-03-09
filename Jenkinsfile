@@ -1,10 +1,9 @@
 pipeline {
     agent { 
-        docker {
-            image 'python:3.8'
-            args '--mount source=jenkins_workspace,target=/workspace'
+          docker {
+        image 'python:3.8'  
         }
-    }
+      }
     triggers {
         pollSCM '* * * * *'
     }
@@ -13,7 +12,7 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
-                cd /workspace/myapp
+                cd myapp
                 pip install -r requirements.txt
                 '''
             }
@@ -22,7 +21,7 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
-                cd /workspace/myapp
+                cd myapp
                 python3 hello.py
                 python3 hello.py --name=Brad
                 '''
